@@ -30,5 +30,7 @@ For pkg-config to find openssl@1.1 you may need to set:
 
 ```bash
 pipenv install
+
+docker-compose up
 pipenv run dev
 ```
