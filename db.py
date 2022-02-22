@@ -11,7 +11,7 @@ Base = declarative_base()
 class Todo(Base):
     __tablename__ = "todos"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     description = Column(String(80), nullable=False, default="")
     completed = Column(Boolean, nullable=False, default=False)
 
