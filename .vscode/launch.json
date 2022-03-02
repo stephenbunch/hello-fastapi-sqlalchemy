@@ -2,22 +2,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Flask",
+      "name": "Debug server",
       "type": "python",
       "request": "launch",
-      "module": "flask",
-      "env": {
-        "FLASK_DEBUG": "0"
-      },
-      "args": [
-        "run",
-        "--no-debugger",
-        "--no-reload",
-        "--port",
-        "8000",
-        "--host",
-        "localhost"
-      ],
+      "module": "uvicorn",
+      "args": ["main:app"],
       "jinja": true
     }
   ]
