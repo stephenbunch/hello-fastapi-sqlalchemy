@@ -13,15 +13,3 @@ engine = create_engine(os.environ["DATABASE_URL"], future=True)
 Base = declarative_base()
 
 Session = sessionmaker(bind=engine)
-
-
-class Todo(Base):
-    __tablename__ = "todos"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    description = Column(String(80), nullable=False, default="")
-    completed = Column(Boolean, nullable=False, default=False)
-
-
-if __name__ == "__main__":
-    Base.metadata.create_all(engine)
