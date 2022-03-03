@@ -12,4 +12,4 @@ engine = create_engine(os.environ["DATABASE_URL"], future=True)
 
 Base = declarative_base()
 
-Session = sessionmaker(bind=engine)
+SessionLocal = sessionmaker(bind=engine)
