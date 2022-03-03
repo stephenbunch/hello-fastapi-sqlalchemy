@@ -9,13 +9,13 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 
-@router.get("/", response_model=List[todo_schemas.Todo])
+@router.get("/", response_model=List[todo_schemas.Todo], operation_id="get_todos")
 def get_todos(db: Session = Depends(deps.get_db)):
     todos = [todo_schemas.Todo.from_orm(todo) for todo in db.query(Todo)]
     return todos
 
 
-@router.get("/{id}", response_model=todo_schemas.Todo)
+@router.get("/{id}", response_model=todo_schemas.Todo, operation_id="get_todo")
 def get_todo(id: str, db: Session = Depends(deps.get_db)):
     todo = db.query(Todo).filter(Todo.id == id).first()
 
@@ -25,8 +25,11 @@ def get_todo(id: str, db: Session = Depends(deps.get_db)):
     return todo_schemas.Todo.from_orm(todo)
 
 
-@router.post("/")
-def create_todo(input: todo_schemas.TodoCreate, db: Session = Depends(deps.get_db)):
+@router.post("/", operation_id="create_todo")
+def create_todo(
+    input: todo_schemas.TodoCreate,
+    db: Session = Depends(deps.get_db),
+):
     todo = Todo(description=input.description, completed=input.completed)
 
     db.add(todo)
@@ -36,9 +39,11 @@ def create_todo(input: todo_schemas.TodoCreate, db: Session = Depends(deps.get_d
     return todo_schemas.Todo.from_orm(todo)
 
 
-@router.patch("/{id}")
+@router.patch("/{id}", operation_id="patch_todo")
 def patch_todo(
-    id: str, input: todo_schemas.TodoPatch, db: Session = Depends(deps.get_db)
+    id: str,
+    input: todo_schemas.TodoPatch,
+    db: Session = Depends(deps.get_db),
 ):
     todo = db.query(Todo).filter(Todo.id == id).first()
 
@@ -56,7 +61,7 @@ def patch_todo(
     return todo_schemas.Todo.from_orm(todo)
 
 
-@router.patch("/", response_model=List[todo_schemas.Todo])
+@router.patch("/", response_model=List[todo_schemas.Todo], operation_id="patch_todos")
 def patch_todos(
     input: todo_schemas.TodoPatch,
     completed: bool = Query(None),
@@ -78,7 +83,7 @@ def patch_todos(
     return [todo_schemas.Todo.from_orm(todo) for todo in query]
 
 
-@router.delete("/")
+@router.delete("/", operation_id="delete_todos")
 def delete_todos(completed: bool = Query(None), db: Session = Depends(deps.get_db)):
     query = db.query(Todo)
 
@@ -89,7 +94,7 @@ def delete_todos(completed: bool = Query(None), db: Session = Depends(deps.get_d
     db.commit()
 
 
-@router.delete("/{id}")
+@router.delete("/{id}", operation_id="delete_todo")
 def delete_todo(id: str, db: Session = Depends(deps.get_db)):
     db.query(Todo).filter(Todo.id == id).delete()
     db.commit()

@@ -7,7 +7,7 @@
       "request": "launch",
       "module": "uvicorn",
       "args": ["main:app"],
-      "jinja": true
+      "cwd": "${workspaceFolder}/server"
     }
   ]
 }
