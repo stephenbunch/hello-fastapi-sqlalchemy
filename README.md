@@ -1,11 +1,15 @@
-## `pipenv`
+This repo was inspired by https://github.com/tiangolo/full-stack-fastapi-postgresql
+
+## Environment setup
+
+### `pipenv`
 
 ```bash
 brew install pipx
 pipx install pipenv
 ```
 
-## Postgres
+### Postgres
 
 https://github.com/psycopg/psycopg2/issues/1200#issuecomment-776159466
 
@@ -34,3 +38,6 @@ pipenv install
 docker-compose up
 pipenv run dev
 ```
+
+http://localhost:8000/docs
+http://localhost:8000/openapi.json
