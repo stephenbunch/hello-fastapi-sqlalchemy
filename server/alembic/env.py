@@ -1,13 +1,14 @@
 import os
 
 from alembic import context
-from dotenv import load_dotenv
+
+from env import load_localenv
 from logging.config import fileConfig
 from sqlalchemy import create_engine
 
 from app.db.base import Base
 
-load_dotenv()
+load_localenv()
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

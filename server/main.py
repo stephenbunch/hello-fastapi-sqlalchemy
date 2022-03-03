@@ -1,9 +1,9 @@
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from app.api import api
+from env import load_localenv
 
-load_dotenv()
+load_localenv()
 
 app = FastAPI()
 app.include_router(api.router, prefix="/api")
