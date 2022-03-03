@@ -11,6 +11,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  # Uncomment this section to test the dockerfile.
   # server:
   #   build:
   #     context: ./
