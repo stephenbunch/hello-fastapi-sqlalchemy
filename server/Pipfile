@@ -10,7 +10,7 @@ alembic = "*"
 sqlalchemy = "*"
 psycopg2 = "*"
 fastapi = "*"
-uvicorn = "*"
+uvicorn = {extras = ["standard"], version = "*"}
 pydantic = "*"
 
 [dev-packages]
@@ -21,7 +21,6 @@ python_version = "3.8"
 
 [scripts]
 dev = "uvicorn main:app --reload"
-
 # pipenv run makemigrations -m "create todo table"
 makemigrations = "alembic revision --autogenerate"
 migrate = "alembic upgrade head"

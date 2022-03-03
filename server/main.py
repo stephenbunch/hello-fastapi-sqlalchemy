@@ -8,8 +8,3 @@ load_localenv()
 app = FastAPI()
 app.include_router(api.router, prefix="/api")
 app.mount("/", StaticFiles(directory="../web/build/", html=True))
-
-
-@app.get("/health")
-def hello_world():
-    return "ok"
